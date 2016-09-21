@@ -2,40 +2,25 @@
 
 namespace VestaApi\Entity\OAuth;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * User
- *
- * @ORM\Table(name="oauth_users", indexes={@ORM\Index(name="email_index", columns={"email"})})
- * @ORM\Entity(repositoryClass="VestaApi\Entity\OAuth\Repository\UserRepository")
  */
 class User extends EncryptableFieldEntity
 {
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="email", type="string", unique=true)
      */
     private $email;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="password", type="string")
      */
     private $password;
-
-
 
     /**
      * Get id
@@ -117,3 +102,4 @@ class User extends EncryptableFieldEntity
         ];
     }
 }
+

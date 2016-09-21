@@ -2,88 +2,55 @@
 
 namespace VestaApi\Entity\OAuth;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * AuthorizationCode
- *
- * @ORM\Table(name="oauth_authorization_codes")
- * @ORM\Entity(repositoryClass="VestaApi\Entity\OAuth\Repository\AuthorizationCodeRepository")
  */
 class AuthorizationCode
 {
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="code", type="string", unique=true)
      */
     private $code;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="client_id", type="integer")
      */
     private $client_id;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="user_id", type="integer", nullable=true)
      */
     private $user_id;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="expires", type="datetime")
      */
     private $expires;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="redirect_uri", type="string")
      */
     private $redirect_uri;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="scope", type="string", nullable=true)
      */
     private $scope;
 
     /**
      * @var \VestaApi\Entity\OAuth\Client
-     *
-     * @ORM\ManyToOne(targetEntity="VestaApi\Entity\OAuth\Client")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="client_id", referencedColumnName="id")
-     * })
      */
     private $client;
 
     /**
      * @var \VestaApi\Entity\OAuth\User
-     *
-     * @ORM\ManyToOne(targetEntity="VestaApi\Entity\OAuth\User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     * })
      */
     private $user;
-
-
 
     /**
      * Get id
@@ -302,11 +269,8 @@ class AuthorizationCode
     }
 
     /**
-     * Get user
-     *
      * @param array $params
-     *
-     * @return \VestaApi\Entity\OAuth\AuthorizationCode
+     * @return AuthorizationCode
      */
     public static function fromArray($params)
     {
@@ -317,3 +281,4 @@ class AuthorizationCode
         return $code;
     }
 }
+

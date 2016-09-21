@@ -6,7 +6,7 @@ require 'vendor/autoload.php';
 $settings = require 'src/settings.php';
 $settings = $settings['settings']['doctrine'];
 
-$config = \Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration(
+$config = \Doctrine\ORM\Tools\Setup::createYAMLMetadataConfiguration(
     $settings['meta']['entity_path'],
     $settings['meta']['auto_generate_proxies'],
     $settings['meta']['proxy_dir'],

@@ -15,7 +15,8 @@ return [
         'doctrine' => [
             'meta' => [
                 'entity_path' => [
-                    'src/Entity'
+                    //'src/_build'
+                    'src/Entity/OAuth'
                 ],
                 'auto_generate_proxies' => true,
                 'proxy_dir' =>  __DIR__.'/../cache/proxies',

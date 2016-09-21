@@ -2,88 +2,50 @@
 
 namespace VestaApi\Entity\OAuth;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
- * AuthorizationCode
- *
- * @ORM\Table(name="oauth_authorization_codes")
- * @ORM\Entity(repositoryClass="VestaApi\Entity\OAuth\Repository\AuthorizationCodeRepository")
+ * RefreshToken
  */
-class AuthorizationCode
+class RefreshToken
 {
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="code", type="string", unique=true)
      */
-    private $code;
+    private $refresh_token;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="client_id", type="integer")
      */
     private $client_id;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="user_id", type="integer", nullable=true)
      */
     private $user_id;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="expires", type="datetime")
      */
     private $expires;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="redirect_uri", type="string")
-     */
-    private $redirect_uri;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="scope", type="string", nullable=true)
      */
     private $scope;
 
     /**
      * @var \VestaApi\Entity\OAuth\Client
-     *
-     * @ORM\ManyToOne(targetEntity="VestaApi\Entity\OAuth\Client")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="client_id", referencedColumnName="id")
-     * })
      */
     private $client;
 
     /**
      * @var \VestaApi\Entity\OAuth\User
-     *
-     * @ORM\ManyToOne(targetEntity="VestaApi\Entity\OAuth\User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     * })
      */
     private $user;
-
-
 
     /**
      * Get id
@@ -96,27 +58,27 @@ class AuthorizationCode
     }
 
     /**
-     * Set code
+     * Set refreshToken
      *
-     * @param string $code
+     * @param string $refreshToken
      *
-     * @return AuthorizationCode
+     * @return RefreshToken
      */
-    public function setCode($code)
+    public function setRefreshToken($refreshToken)
     {
-        $this->code = $code;
+        $this->refresh_token = $refreshToken;
 
         return $this;
     }
 
     /**
-     * Get code
+     * Get refreshToken
      *
      * @return string
      */
-    public function getCode()
+    public function getRefreshToken()
     {
-        return $this->code;
+        return $this->refresh_token;
     }
 
     /**
@@ -124,7 +86,7 @@ class AuthorizationCode
      *
      * @param integer $clientId
      *
-     * @return AuthorizationCode
+     * @return RefreshToken
      */
     public function setClientId($clientId)
     {
@@ -148,7 +110,7 @@ class AuthorizationCode
      *
      * @param integer $userId
      *
-     * @return AuthorizationCode
+     * @return RefreshToken
      */
     public function setUserId($userId)
     {
@@ -172,7 +134,7 @@ class AuthorizationCode
      *
      * @param \DateTime $expires
      *
-     * @return AuthorizationCode
+     * @return RefreshToken
      */
     public function setExpires($expires)
     {
@@ -192,35 +154,11 @@ class AuthorizationCode
     }
 
     /**
-     * Set redirectUri
-     *
-     * @param string $redirectUri
-     *
-     * @return AuthorizationCode
-     */
-    public function setRedirectUri($redirectUri)
-    {
-        $this->redirect_uri = $redirectUri;
-
-        return $this;
-    }
-
-    /**
-     * Get redirectUri
-     *
-     * @return string
-     */
-    public function getRedirectUri()
-    {
-        return $this->redirect_uri;
-    }
-
-    /**
      * Set scope
      *
      * @param string $scope
      *
-     * @return AuthorizationCode
+     * @return RefreshToken
      */
     public function setScope($scope)
     {
@@ -244,7 +182,7 @@ class AuthorizationCode
      *
      * @param \VestaApi\Entity\OAuth\Client $client
      *
-     * @return AuthorizationCode
+     * @return RefreshToken
      */
     public function setClient(\VestaApi\Entity\OAuth\Client $client = null)
     {
@@ -268,7 +206,7 @@ class AuthorizationCode
      *
      * @param \VestaApi\Entity\OAuth\User $user
      *
-     * @return AuthorizationCode
+     * @return RefreshToken
      */
     public function setUser(\VestaApi\Entity\OAuth\User $user = null)
     {
@@ -293,7 +231,7 @@ class AuthorizationCode
     public function toArray()
     {
         return [
-            'code' => $this->code,
+            'refresh_token' => $this->refresh_token,
             'client_id' => $this->client_id,
             'user_id' => $this->user_id,
             'expires' => $this->expires,
@@ -302,18 +240,16 @@ class AuthorizationCode
     }
 
     /**
-     * Get user
-     *
      * @param array $params
-     *
-     * @return \VestaApi\Entity\OAuth\AuthorizationCode
+     * @return RefreshToken
      */
     public static function fromArray($params)
     {
-        $code = new self();
+        $token = new self();
         foreach ($params as $property => $value) {
-            $code->$property = $value;
+            $token->$property = $value;
         }
-        return $code;
+        return $token;
     }
 }
+

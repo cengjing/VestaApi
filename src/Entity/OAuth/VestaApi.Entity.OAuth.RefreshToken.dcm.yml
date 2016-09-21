@@ -1,0 +1,36 @@
+VestaApi\Entity\OAuth\RefreshToken:
+  type:             entity
+  table:            oauth_refresh_tokens
+  repositoryClass:  VestaApi\Entity\OAuth\Repository\RefreshTokenRepository
+  id:
+    id:
+      type:   integer
+      generator:
+        strategy: AUTO
+  fields:
+    refresh_token:
+      refresh_token:  string
+      max_length:     40
+      unique:         true
+    client_id:
+      type:       integer
+    user_id:
+      type:       integer
+      nullable:   true
+    expires:
+      type:       datetime
+    scope:
+      type:       string
+      max_length: 50
+      nullable:   true
+  manyToOne:
+    client:
+      targetEntity: VestaApi\Entity\OAuth\Client
+      joinColumn:
+        name:                 client_id
+        referencedColumnName: id
+    user:
+      targetEntity: VestaApi\Entity\OAuth\User
+      joinColumn:
+        name:                 user_id
+        referencedColumnName: id

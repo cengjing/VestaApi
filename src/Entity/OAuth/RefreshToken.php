@@ -2,50 +2,81 @@
 
 namespace VestaApi\Entity\OAuth;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * RefreshToken
+ *
+ * @ORM\Table(name="oauth_refresh_tokens")
+ * @ORM\Entity(repositoryClass="VestaApi\Entity\OAuth\Repository\RefreshTokenRepository")
  */
 class RefreshToken
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="refresh_token", type="string", unique=true)
      */
     private $refresh_token;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="client_id", type="integer")
      */
     private $client_id;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="user_id", type="integer", nullable=true)
      */
     private $user_id;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="expires", type="datetime")
      */
     private $expires;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="scope", type="string", nullable=true)
      */
     private $scope;
 
     /**
      * @var \VestaApi\Entity\OAuth\Client
+     *
+     * @ORM\ManyToOne(targetEntity="VestaApi\Entity\OAuth\Client")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="client_id", referencedColumnName="id")
+     * })
      */
     private $client;
 
     /**
      * @var \VestaApi\Entity\OAuth\User
+     *
+     * @ORM\ManyToOne(targetEntity="VestaApi\Entity\OAuth\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
      */
     private $user;
+
+
 
     /**
      * Get id
@@ -240,8 +271,11 @@ class RefreshToken
     }
 
     /**
+     * Get user
+     *
      * @param array $params
-     * @return RefreshToken
+     *
+     * @return \VestaApi\Entity\OAuth\RefreshToken
      */
     public static function fromArray($params)
     {
@@ -252,4 +286,3 @@ class RefreshToken
         return $token;
     }
 }
-

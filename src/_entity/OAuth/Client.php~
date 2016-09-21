@@ -2,46 +2,30 @@
 
 namespace VestaApi\Entity\OAuth;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Client
- *
- * @ORM\Table(name="oauth_clients")
- * @ORM\Entity(repositoryClass="VestaApi\Entity\OAuth\Repository\ClientRepository")
  */
-class Client extends EncryptableFieldEntity
+class Client
 {
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="client_identifier", type="string", unique=true)
      */
     private $client_identifier;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="client_secret", type="string")
      */
     private $client_secret;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="redirect_uri", type="string")
      */
     private $redirect_uri;
-
 
 
     /**
@@ -87,7 +71,7 @@ class Client extends EncryptableFieldEntity
      */
     public function setClientSecret($clientSecret)
     {
-        $this->client_secret = $this->encryptField($clientSecret);
+        $this->client_secret = $clientSecret;
 
         return $this;
     }
@@ -100,17 +84,6 @@ class Client extends EncryptableFieldEntity
     public function getClientSecret()
     {
         return $this->client_secret;
-    }
-
-    /**
-     * Verify client's secret
-     *
-     * @param string $clientSecret
-     * @return Boolean
-     */
-    public function verifyClientSecret($clientSecret)
-    {
-        return $this->verifyEncryptedFieldValue($this->getClientSecret(), $clientSecret);
     }
 
     /**
@@ -136,16 +109,5 @@ class Client extends EncryptableFieldEntity
     {
         return $this->redirect_uri;
     }
-
-    /**
-     * @return array
-     */
-    public function toArray()
-    {
-        return [
-            'client_id' => $this->client_identifier,
-            'client_secret' => $this->client_secret,
-            'redirect_uri' => $this->redirect_uri,
-        ];
-    }
 }
+

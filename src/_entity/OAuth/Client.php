@@ -2,47 +2,30 @@
 
 namespace VestaApi\Entity\OAuth;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Client
- *
- * @ORM\Table(name="oauth_clients")
- * @ORM\Entity(repositoryClass="VestaApi\Entity\OAuth\Repository\ClientRepository")
  */
 class Client extends EncryptableFieldEntity
 {
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="client_identifier", type="string", unique=true)
      */
     private $client_identifier;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="client_secret", type="string")
      */
     private $client_secret;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="redirect_uri", type="string")
      */
     private $redirect_uri;
-
-
 
     /**
      * Get id
@@ -87,7 +70,7 @@ class Client extends EncryptableFieldEntity
      */
     public function setClientSecret($clientSecret)
     {
-        $this->client_secret = $this->encryptField($clientSecret);
+        $this->client_secret = $clientSecret;
 
         return $this;
     }
@@ -149,3 +132,4 @@ class Client extends EncryptableFieldEntity
         ];
     }
 }
+
