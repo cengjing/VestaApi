@@ -1,0 +1,61 @@
+<?php
+
+namespace VestaApi\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Section
+ *
+ * @ORM\Table(name="access_sections")
+ * @ORM\Entity(repositoryClass="VestaApi\Entity\Repository\Section")
+ */
+class Section
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="label", type="string", unique=true)
+     */
+    private $label;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string")
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string")
+     */
+    private $description;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="VestaApi\Entity\Permission", mappedBy="section")
+     */
+    private $permissions;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->permissions = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

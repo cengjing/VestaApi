@@ -1,0 +1,23 @@
+VestaApi\Entity\Section:
+  type:             entity
+  table:            access_sections
+  repositoryClass:  VestaApi\Entity\Repository\Section
+  id:
+    id:
+      type:   integer
+      generator:
+        strategy: AUTO
+  fields:
+    label:
+      type:       string
+      unique:         true
+      max_length: 40
+    title:
+      type:  string
+      max_length: 200
+    description:
+      type:  string
+  oneToMany:
+    permissions:
+      targetEntity: VestaApi\Entity\Permission
+      mappedBy: section

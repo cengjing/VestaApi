@@ -1,0 +1,38 @@
+VestaApi\Entity\User:
+  type: entity
+  table: oauth_users
+  repositoryClass:  VestaApi\Entity\Repository\UserRepository
+  id:
+    id:
+      type:   integer
+      generator:
+        strategy: AUTO
+  fields:
+    email:
+      type:   string
+      unique: true
+    password:
+      type:   string
+    name:
+      type:   string
+      options:
+        default: ""
+    lastname:
+      type:   string
+      options:
+        default: ""
+    phone:
+      type:   string
+      unique: true
+  manyToOne:
+    group:
+      targetEntity: VestaApi\Entity\Group
+      inversedBy: users
+      joinColumn:
+        name:                 group_id
+        referencedColumnName: id
+  indexes:
+    email_index:
+      columns: [ email ]
+    phone_index:
+          columns: [ phone ]

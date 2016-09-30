@@ -1,0 +1,58 @@
+VestaApi\Entity\Permission:
+  type:             entity
+  table:            access_permissions
+  repositoryClass:  VestaApi\Entity\Repository\Permission
+  id:
+    id:
+      type:   integer
+      generator:
+        strategy: AUTO
+  fields:
+    create:
+      type:   integer
+      max_length: 1
+      options:
+        default: 0
+    read:
+      type:   integer
+      max_length: 1
+      options:
+        default: 0
+    update:
+      type:   integer
+      max_length: 1
+      options:
+        default: 0
+    delete:
+      type:   integer
+      max_length: 1
+      options:
+        default: 0
+    remove:
+      type:   integer
+      max_length: 1
+      options:
+        default: 0
+    upload:
+      type:   integer
+      max_length: 1
+      options:
+        default: 0
+    download:
+      type:   integer
+      max_length: 1
+      options:
+        default: 0
+  manyToOne:
+    group:
+      targetEntity: VestaApi\Entity\Group
+      inversedBy: permissions
+      joinColumn:
+        name:                 group_id
+        referencedColumnName: id
+    section:
+      targetEntity: VestaApi\Entity\Section
+      inversedBy: permissions
+      joinColumn:
+        name:                 section_id
+        referencedColumnName: id

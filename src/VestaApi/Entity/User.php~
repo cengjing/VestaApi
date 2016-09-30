@@ -1,0 +1,71 @@
+<?php
+
+namespace VestaApi\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * User
+ *
+ * @ORM\Table(name="oauth_users", indexes={@ORM\Index(name="email_index", columns={"email"}), @ORM\Index(name="phone_index", columns={"phone"})})
+ * @ORM\Entity(repositoryClass="VestaApi\Entity\Repository\UserRepository")
+ */
+class User
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", unique=true)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string")
+     */
+    private $password;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string")
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lastname", type="string")
+     */
+    private $lastname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone", type="string", unique=true)
+     */
+    private $phone;
+
+    /**
+     * @var \VestaApi\Entity\Group
+     *
+     * @ORM\ManyToOne(targetEntity="VestaApi\Entity\Group", inversedBy="users")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="group_id", referencedColumnName="id")
+     * })
+     */
+    private $group;
+
+
+}
+

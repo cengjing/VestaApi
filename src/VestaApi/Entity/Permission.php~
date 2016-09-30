@@ -1,0 +1,95 @@
+<?php
+
+namespace VestaApi\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Permission
+ *
+ * @ORM\Table(name="access_permissions")
+ * @ORM\Entity(repositoryClass="VestaApi\Entity\Repository\Permission")
+ */
+class Permission
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="create", type="integer")
+     */
+    private $create = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="read", type="integer")
+     */
+    private $read = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="update", type="integer")
+     */
+    private $update = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="delete", type="integer")
+     */
+    private $delete = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="remove", type="integer")
+     */
+    private $remove = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="upload", type="integer")
+     */
+    private $upload = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="download", type="integer")
+     */
+    private $download = 0;
+
+    /**
+     * @var \VestaApi\Entity\Group
+     *
+     * @ORM\ManyToOne(targetEntity="VestaApi\Entity\Group", inversedBy="permissions")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="group_id", referencedColumnName="id")
+     * })
+     */
+    private $group;
+
+    /**
+     * @var \VestaApi\Entity\Section
+     *
+     * @ORM\ManyToOne(targetEntity="VestaApi\Entity\Section", inversedBy="permissions")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="section_id", referencedColumnName="id")
+     * })
+     */
+    private $section;
+
+
+}
+
